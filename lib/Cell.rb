@@ -1,8 +1,16 @@
 class Cell
-  def initialize
+  def initialize(alive, x, y)
     @alive = alive
     @x = x
     @y = y
+  end
+
+  def x 
+    @x
+  end
+
+  def y
+    @y
   end
   
   def alive
@@ -16,6 +24,4 @@ class Cell
   def show
     self.alive ? "\u2B1C" : "\u2B1B"
   end
-
-
 end
