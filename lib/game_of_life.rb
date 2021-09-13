@@ -6,7 +6,8 @@ def initialise
 
   (1..10).each do |x|
     (1..10).each do |y|
-      row << Cell
+      cell = Cell.new
+      row << cell
     end
     grid << row
     row = []

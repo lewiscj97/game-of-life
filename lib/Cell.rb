@@ -1,8 +1,7 @@
-ALIVE = "a"
-DEAD = "d"
-
 class Cell
-  def initialize(state)
+  @@state
+
+  def set_state(state)
     @@state = state
   end
 
