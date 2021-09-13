@@ -21,10 +21,11 @@ end
 def display
   @grid.each do |row|
     row.each do |cell|
-      print cell.alive
+      print cell.show
     end
+    puts ""
   end
 end
 
-initialise(100,100)
+initialise(20,50)
 display
