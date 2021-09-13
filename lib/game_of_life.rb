@@ -1,4 +1,4 @@
-require 'Cell'
+require_relative "cell"
 
 def initialise
   grid = []
