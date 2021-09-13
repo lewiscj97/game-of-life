@@ -1,4 +1,5 @@
 require 'game_of_life'
+require 'Cell'
 
 describe 'game_of_life' do
   it 'returns an array when initialised' do
@@ -18,5 +19,12 @@ describe 'game_of_life' do
       [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
       [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell]
   ]
+  end
+end
+
+describe 'Cell' do
+  it 'returns "ALIVE" when a Cell is created in alive state and state is checked' do
+    cell = Cell.new("ALIVE")
+    expect(cell.state?).to eq "ALIVE"
   end
 end
