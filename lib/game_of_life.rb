@@ -14,5 +14,3 @@ def initialise
   end
   return grid
 end
-
-puts "\u25A1"
