@@ -1,20 +1,13 @@
 class Cell
-  @@state
-
-  def display
-    outcome = ""
-    if self.state? == "ALIVE"
-      outcome = "\u25A0"
-    elsif self.state? == "DEAD"
-      outcome = "\u25A1"
-    end
+  def initialize
+    @alive = false
   end
-
-  def set_state(state)
-    @@state = state
+  
+  def alive
+    @alive
   end
-
-  def state?
-    return @@state
+  
+  def alive=(alive)
+    @alive = alive
   end
 end

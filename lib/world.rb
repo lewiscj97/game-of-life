@@ -25,11 +25,3 @@ def display
     end
   end
 end
-
-initialise(10, 10)
-seed(0,0)
-seed(0,1)
-seed(0,2)
-seed(0,3)
-seed(0,4)
-display
