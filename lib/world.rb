@@ -25,3 +25,6 @@ def display
     end
   end
 end
+
+initialise(100,100)
+display
