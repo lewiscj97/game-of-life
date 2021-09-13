@@ -15,19 +15,6 @@ describe 'game_of_life' do
         expect(y.class).to eq Cell
       end
     end
-    
-  #   expect(initialise()).to eq [
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell],
-  #     [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell]
-  # ]  
   end
 end
 
