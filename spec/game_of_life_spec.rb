@@ -24,4 +24,10 @@ describe 'Cell' do
     cell.set_state("ALIVE")
     expect(cell.state?).to eq "ALIVE"
   end
+
+  it 'returns a unicode black square when cell.display is called on a dead cell' do
+    cell = Cell.new
+    cell.set_state("DEAD")
+    expect(cell.display).to eq "\u25A1"
+  end
 end
