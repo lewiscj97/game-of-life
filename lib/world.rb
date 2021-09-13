@@ -10,7 +10,7 @@ def initialise(x, y)
 
   (1..x).each do |a|
     (1..y).each do |b|
-      row << Cell.new
+      row << Cell.new(false, x, y)
     end
     @grid << row
     row = []
@@ -32,9 +32,6 @@ end
 
 def logic(x, y)
   counter = 0
-
-
-  
   # if @grid[x-1][y-1].alive == true
   #   counter += 1 unless x - 1 < 0 || y - 1 < 0
   # end
@@ -72,7 +69,5 @@ end
 
 initialise(10,10)
 seed(0,9)
-logic(10,9)
 
-
-# display
+display
