@@ -75,19 +75,11 @@ class World
     end
   end
 
-  def check
-    @@cells.each do |coordinate, cell|
-      neighbour_cells = get_neighbour_cells(cell)
-      counter = count_neigbour_cell_states(neighbour_cells)
-      find_cells_to_switch(cell, counter)
-    end
-
+  def switch_cells
     @@cells_to_switch.each do |cell|
       cell.switch
     end
-
     @@cells_to_switch = []
-    
   end
 
   def seed_randomly
@@ -96,6 +88,15 @@ class World
         cell.alive=(true)
       end
     end
+  end
+
+  def check
+    @@cells.each do |coordinate, cell|
+      neighbour_cells = get_neighbour_cells(cell)
+      counter = count_neigbour_cell_states(neighbour_cells)
+      find_cells_to_switch(cell, counter)
+    end
+    switch_cells
   end
 
   def run
