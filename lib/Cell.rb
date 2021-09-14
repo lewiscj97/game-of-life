@@ -21,8 +21,13 @@ class Cell
     @alive = alive
   end
 
+  def switch
+    @alive = !@alive
+  end
+
   def show
     self.alive ? "\u2B1C" : "\u2B1B"
+    # print [x, y]
   end
 
   def neighbours

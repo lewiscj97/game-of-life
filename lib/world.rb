@@ -20,10 +20,6 @@ class World
     end
   end
 
-  def board_size
-    size = [[0, 0], [@x-1, @y-1]]
-  end
-
   def cells
     @@cells
   end
@@ -40,35 +36,61 @@ class World
       puts ""
     end
   end
+
+  def check
+    cells_to_switch = []
+    @@cells.each do |coordinate, cell|
+      counter = 0
+      neighbour_coordinates = cell.neighbours
+      neighbour_cells = []
+
+      neighbour_coordinates.each do |coordinates|
+        neighbour_cells << @@cells[coordinates]
+      end
+
+      neighbour_cells.each do |neighbour|
+        if !neighbour.nil?
+          if neighbour.alive == true
+          counter += 1
+          end
+        end
+      end
+      
+      if cell.alive == true
+        if counter == 2 || counter == 3
+          # cell.alive=(true)
+        elsif counter < 2
+          # cell.alive=(false)
+          cells_to_switch << cell
+        elsif counter > 3
+          # cell.alive=(false)
+          cells_to_switch << cell
+        end
+
+      elsif cell.alive == false
+        if counter == 3
+          # cell.alive=(true)
+          cells_to_switch << cell
+        end
+      end
+    end
+    cells_to_switch.each do |cell|
+      cell.switch
+    end
+  end    
 end
 
 w = World.new(10,10)
-# w.seed(1,1)
-# w.seed(0,1)
-w.seed(0,2)
+w.seed(1,1)
+w.seed(0,1)
 w.seed(0,0)
 w.seed(1,0)
+w.seed(2,3)
 
 w.display
+puts ""
 
-cells = w.cells
-cell = cells[[1,1]]
-
-counter = 0
-cell.neighbours.each do |neighbour|
-  if cells[neighbour].alive == true
-    counter += 1
-  end
-end
-
-if cell.alive
-  if counter > 3
-    cell.alive=(false)
-  end
-else
-  if counter == 3
-    cell.alive=(true)
-  end
-end
+w.check
+puts ""
 
 w.display
