@@ -58,39 +58,41 @@ class World
       
       if cell.alive == true
         if counter == 2 || counter == 3
-          # cell.alive=(true)
         elsif counter < 2
-          # cell.alive=(false)
           cells_to_switch << cell
         elsif counter > 3
-          # cell.alive=(false)
           cells_to_switch << cell
         end
 
       elsif cell.alive == false
         if counter == 3
-          # cell.alive=(true)
           cells_to_switch << cell
         end
       end
     end
+
     cells_to_switch.each do |cell|
       cell.switch
     end
-  end    
+  end
+
+  def seed_randomly
+    @@cells.each do |coordinate, cell|
+      if rand(10) > 5
+        cell.alive=(true)
+      end
+    end
+  end
+
+  def run
+    seed_randomly
+    while true
+      display
+      check
+      sleep(0.05) 
+    end
+  end
 end
 
-w = World.new(10,10)
-w.seed(1,1)
-w.seed(0,1)
-w.seed(0,0)
-w.seed(1,0)
-w.seed(2,3)
-
-w.display
-puts ""
-
-w.check
-puts ""
-
-w.display
+w = World.new(40, 100)
+w.run
