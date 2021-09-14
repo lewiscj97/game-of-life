@@ -7,15 +7,18 @@ class Cell
 
   attr_reader :x
   attr_reader :y
-  attr_reader :alive
   attr_writer :alive
 
   def switch
     @alive = !@alive
   end
 
+  def alive?
+    @alive
+  end
+
   def show
-    self.alive ? "\u2B1C" : "\u2B1B"
+    self.alive? ? "\u2B1C" : "\u2B1B"
   end
 
   def neighbours

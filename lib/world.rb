@@ -51,7 +51,7 @@ class World
     counter = 0
     cells.each do |neighbour|
       if !neighbour.nil?
-        if neighbour.alive == true
+        if neighbour.alive? == true
         counter += 1
         end
       end
@@ -60,7 +60,7 @@ class World
   end
 
   def find_cells_to_switch(cell, counter)
-    if cell.alive == true
+    if cell.alive? == true
       if counter == 2 || counter == 3
       elsif counter < 2
         @@cells_to_switch << cell
@@ -68,7 +68,7 @@ class World
         @@cells_to_switch << cell
       end
 
-    elsif cell.alive == false
+    elsif cell.alive? == false
       if counter == 3
         @@cells_to_switch << cell
       end
@@ -85,7 +85,7 @@ class World
   def seed_randomly
     @@cells.each do |coordinate, cell|
       if rand(10) > 5
-        cell.alive=(true)
+        cell.alive = true
       end
     end
   end
