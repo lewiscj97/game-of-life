@@ -5,21 +5,10 @@ class Cell
     @y = y
   end
 
-  def x 
-    @x
-  end
-
-  def y
-    @y
-  end
-  
-  def alive
-    @alive
-  end
-  
-  def alive=(alive)
-    @alive = alive
-  end
+  attr_reader :x
+  attr_reader :y
+  attr_reader :alive
+  attr_writer :alive
 
   def switch
     @alive = !@alive
@@ -27,26 +16,13 @@ class Cell
 
   def show
     self.alive ? "\u2B1C" : "\u2B1B"
-    # print [x, y]
   end
 
   def neighbours
-    neighbours = []
-    neighbours.push([self.x - 1, self.y - 1])
-    neighbours.push([self.x - 1, self.y])
-    neighbours.push([self.x - 1, self.y + 1])
-
-    neighbours.push([self.x, self.y - 1])
-    neighbours.push([self.x, self.y + 1])
-
-    neighbours.push([self.x + 1, self.y - 1])
-    neighbours.push([self.x + 1, self.y])
-    neighbours.push([self.x + 1, self.y + 1])
-    
-    neighbours
-  end
-
-  def self.all
-    ObjectSpace.each_object(self).to_a
+    neighbours = [
+      [self.x - 1, self.y - 1], [self.x - 1, self.y], [self.x - 1, self.y + 1],
+      [self.x, self.y - 1], [self.x, self.y + 1],
+      [self.x + 1, self.y - 1], [self.x + 1, self.y], [self.x + 1, self.y + 1] 
+    ]
   end
 end
