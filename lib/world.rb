@@ -4,6 +4,8 @@ class World
   @@grid = []
   @@cells = {}
 
+  attr_reader :cells
+
   def initialize(x, y)
     row = []
     @x = x
@@ -19,13 +21,9 @@ class World
       row = []
     end
   end
-
-  def cells
-    @@cells
-  end
   
   def seed(x, y)
-    @@grid[x][y].alive = true
+    @@cells[[x,y]].alive = true
   end
 
   def display
