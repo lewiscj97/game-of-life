@@ -3,6 +3,7 @@ require_relative "cell"
 class World
   @@grid = []
   @@cells = {}
+  @@cells_to_switch = []
 
   attr_reader :cells
 
@@ -58,32 +59,35 @@ class World
     counter
   end
 
-  def check
-    cells_to_switch = []
-    @@cells.each do |coordinate, cell|
+  def find_cells_to_switch(cell, counter)
+    if cell.alive == true
+      if counter == 2 || counter == 3
+      elsif counter < 2
+        @@cells_to_switch << cell
+      elsif counter > 3
+        @@cells_to_switch << cell
+      end
 
-      neighbour_cells = get_neighbour_cells(cell)
-
-      counter = count_neigbour_cell_states(neighbour_cells)
-      
-      if cell.alive == true
-        if counter == 2 || counter == 3
-        elsif counter < 2
-          cells_to_switch << cell
-        elsif counter > 3
-          cells_to_switch << cell
-        end
-
-      elsif cell.alive == false
-        if counter == 3
-          cells_to_switch << cell
-        end
+    elsif cell.alive == false
+      if counter == 3
+        @@cells_to_switch << cell
       end
     end
+  end
 
-    cells_to_switch.each do |cell|
+  def check
+    @@cells.each do |coordinate, cell|
+      neighbour_cells = get_neighbour_cells(cell)
+      counter = count_neigbour_cell_states(neighbour_cells)
+      find_cells_to_switch(cell, counter)
+    end
+
+    @@cells_to_switch.each do |cell|
       cell.switch
     end
+
+    @@cells_to_switch = []
+    
   end
 
   def seed_randomly
@@ -104,5 +108,5 @@ class World
   end
 end
 
-w = World.new(10, 10)
+w = World.new(20, 20)
 w.run
