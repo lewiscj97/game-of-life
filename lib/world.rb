@@ -43,24 +43,28 @@ class World
     neighbour_coordinates.each do |coordinates|
       neighbour_cells << @@cells[coordinates]
     end
-
     neighbour_cells
+  end
+
+  def count_neigbour_cell_states(cells)
+    counter = 0
+    cells.each do |neighbour|
+      if !neighbour.nil?
+        if neighbour.alive == true
+        counter += 1
+        end
+      end
+    end
+    counter
   end
 
   def check
     cells_to_switch = []
     @@cells.each do |coordinate, cell|
-      counter = 0
-      
+
       neighbour_cells = get_neighbour_cells(cell)
 
-      neighbour_cells.each do |neighbour|
-        if !neighbour.nil?
-          if neighbour.alive == true
-          counter += 1
-          end
-        end
-      end
+      counter = count_neigbour_cell_states(neighbour_cells)
       
       if cell.alive == true
         if counter == 2 || counter == 3
