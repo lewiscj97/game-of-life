@@ -35,16 +35,24 @@ class World
     end
   end
 
+  def get_neighbour_cells(cell)
+    neighbour_coordinates = cell.neighbours
+    neighbour_cells = []
+    
+    neighbour_coordinates = cell.neighbours
+    neighbour_coordinates.each do |coordinates|
+      neighbour_cells << @@cells[coordinates]
+    end
+
+    neighbour_cells
+  end
+
   def check
     cells_to_switch = []
     @@cells.each do |coordinate, cell|
       counter = 0
-      neighbour_coordinates = cell.neighbours
-      neighbour_cells = []
-
-      neighbour_coordinates.each do |coordinates|
-        neighbour_cells << @@cells[coordinates]
-      end
+      
+      neighbour_cells = get_neighbour_cells(cell)
 
       neighbour_cells.each do |neighbour|
         if !neighbour.nil?
@@ -92,5 +100,5 @@ class World
   end
 end
 
-w = World.new(40, 100)
+w = World.new(10, 10)
 w.run
