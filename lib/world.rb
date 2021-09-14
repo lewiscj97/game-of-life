@@ -43,11 +43,32 @@ class World
 end
 
 w = World.new(10,10)
-w.seed(1,1)
-w.seed(0,1)
+# w.seed(1,1)
+# w.seed(0,1)
+w.seed(0,2)
+w.seed(0,0)
+w.seed(1,0)
+
 w.display
 
-# cell = Cell.new(false, 1, 1)
-# cell.neighbours.each do |coords|
-#   print w.cells[coords].alive
-# end
+cells = w.cells
+cell = cells[[1,1]]
+
+counter = 0
+cell.neighbours.each do |neighbour|
+  if cells[neighbour].alive == true
+    counter += 1
+  end
+end
+
+if cell.alive
+  if counter > 3
+    cell.alive=(false)
+  end
+else
+  if counter == 3
+    cell.alive=(true)
+  end
+end
+
+w.display
