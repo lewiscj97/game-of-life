@@ -108,6 +108,3 @@ class World
     end
   end
 end
-
-w = World.new(20, 20)
-w.run
