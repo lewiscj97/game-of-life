@@ -5,6 +5,8 @@ class World
 
   def initialize(x, y)
     row = []
+    @x = x
+    @y = y
   
     (0..x-1).each_with_index do |a, x_index|
       (0..y-1).each_with_index do |b, y_index|
@@ -15,6 +17,10 @@ class World
       row = []
     end
     @@cells = @@grid.flatten
+  end
+
+  def board_size
+    size = [[0, 0], [@x-1, @y-1]]
   end
 
   def cells
@@ -39,4 +45,9 @@ w = World.new(10,10)
 w.seed(0,9)
 w.seed(0,5)
 w.display
-print w.cells
+print w.board_size
+
+cell = Cell.new(false, 0, 0)
+# print cell.neighbours
+
+# print w.cells
