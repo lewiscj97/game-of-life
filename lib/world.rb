@@ -2,6 +2,7 @@ require_relative "cell"
 
 class World
   @@grid = []
+  @@cells = {}
 
   def initialize(x, y)
     row = []
@@ -12,11 +13,11 @@ class World
       (0..y-1).each_with_index do |b, y_index|
         cell = Cell.new(false, x_index, y_index)
         row << cell
+        @@cells[[x_index, y_index]] = cell
       end
       @@grid << row
       row = []
     end
-    @@cells = @@grid.flatten
   end
 
   def board_size
@@ -42,12 +43,11 @@ class World
 end
 
 w = World.new(10,10)
-w.seed(0,9)
-w.seed(0,5)
+w.seed(1,1)
+w.seed(0,1)
 w.display
-print w.board_size
 
-cell = Cell.new(false, 0, 0)
-# print cell.neighbours
-
-# print w.cells
+# cell = Cell.new(false, 1, 1)
+# cell.neighbours.each do |coords|
+#   print w.cells[coords].alive
+# end
