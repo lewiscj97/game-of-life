@@ -2,6 +2,8 @@
 
 Conway's Game of Life is a programming problem - https://github.com/makersacademy/course/blob/main/individual_challenges/game_of_life.md.
 
+![game-of-life-gif](https://github.com/lewiscj97/game-of-life/blob/main/files/game_of_life.gif)
+
 ## Rules
 
 - The game evolves in turns, commonly known as 'ticks'.
