@@ -23,5 +23,17 @@ describe World do
     end
   end
 
-  
+  it 'returns a hash where the key is the coordinate of cell and value is the cell object for all cells in grid' do
+    w = World.new(10, 10)
+    w.build
+    cells = w.cells
+    expect(cells.class).to eq Hash
+    cells.each do |key, value|
+      expect(key.class).to eq Array
+      expect(value.class).to eq Cell
+    end
+    cell = cells[[0,0]]
+    expect(cell.x).to eq 0
+    expect(cell.y).to eq 0
+  end
 end
