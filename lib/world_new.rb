@@ -77,18 +77,22 @@ class World
     end
   end
 
-  def check
+  def find_cells_to_switch(cell, counter, cells_to_switch)
+    if cell.alive? && counter < 2
+      cells_to_switch << cell
+    elsif cell.alive? && counter > 3
+      cells_to_switch << cell
+    elsif !cell.alive? && counter == 3
+      cells_to_switch << cell
+    end
+  end
+
+  def tick
     cells_to_switch = []
     self.cells.each do |coordinate, cell|
       neighbour_cells = get_neighbour_cells(cell)
       counter = count_neigbour_cell_states(neighbour_cells)
-      if cell.alive? && counter < 2
-        cells_to_switch << cell
-      elsif cell.alive? && counter > 3
-        cells_to_switch << cell
-      elsif !cell.alive? && counter == 3
-        cells_to_switch << cell
-      end
+      find_cells_to_switch(cell, counter, cells_to_switch)
     end
     switch_cells(cells_to_switch)
     cells_to_switch = []
@@ -98,7 +102,7 @@ class World
     seed_randomly
     while true
       display
-      check
+      tick
       sleep(0.05)
     end
   end
