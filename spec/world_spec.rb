@@ -36,4 +36,7 @@ describe World do
     expect(cell.x).to eq 0
     expect(cell.y).to eq 0
   end
+
+  # TODO: finish writing tests for all methods in world
+  # TODO: write integration tests for multiple situations
 end
