@@ -52,10 +52,20 @@ class World
     end
     neighbour_cells
   end
+
+  def count_neigbour_cell_states(cells)
+    counter = 0
+    cells.each do |neighbour|
+      if !neighbour.nil? && neighbour.alive? == true
+        counter += 1
+      end
+    end
+    counter
+  end
 end
 
 w = World.new(10,10)
 w.build
-# w.seed(0,0)
-# w.seed(0,1)
+w.seed(0,0)
+w.seed(0,1)
 w.display
