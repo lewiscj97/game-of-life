@@ -59,4 +59,3 @@ w.build
 # w.seed(0,0)
 # w.seed(0,1)
 w.display
-print w.get_neighbour_cells(Cell(false, 0, 0))
