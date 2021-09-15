@@ -93,20 +93,13 @@ class World
     switch_cells(cells_to_switch)
     cells_to_switch = []
   end
-end
 
-w = World.new(10,10)
-w.build
-# w.seed(0,0)
-# w.seed(0,1)
-# w.seed(1,0)
-w.seed_randomly
-w.display
-# cell = w.cells[[0,0]]
-# neighbour_cells = w.get_neighbour_cells(cell)
-# counter =  w.count_neigbour_cell_states(neighbour_cells)
-# puts "Switch: #{w.find_cells_to_switch(cell, counter)}"
-# w.find_cells_to_switch(cell, counter)
-# w.switch_cells(w.find_cells_to_switch)
-w.check
-w.display
+  def run
+    seed_randomly
+    while true
+      display
+      check
+      sleep(0.05)
+    end
+  end
+end
