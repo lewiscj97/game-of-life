@@ -5,6 +5,7 @@ class World
   attr_reader :y
   attr_reader :grid
   attr_reader :cells
+  attr_reader :cells_to_switch
 
   def initialize(x, y)
     @x = x
@@ -62,10 +63,27 @@ class World
     end
     counter
   end
+
+  def find_cells_to_switch(cell, counter)
+    cells_to_switch = []
+    if cell.alive? && counter < 2
+      cells_to_switch << cell
+    elsif cell.alive? && counter > 3
+      cells_to_switch << cell
+    elsif !cell.alive? && counter == 3
+      cells_to_switch << cell
+    end
+    @cells_to_switch = cells_to_switch
+  end
 end
 
 w = World.new(10,10)
 w.build
 w.seed(0,0)
 w.seed(0,1)
-w.display
+# w.display
+cell = w.cells[[0,0]]
+neighbour_cells = w.get_neighbour_cells(cell)
+counter =  w.count_neigbour_cell_states(neighbour_cells)
+puts "Switch: #{w.find_cells_to_switch(cell, counter)}"
+
