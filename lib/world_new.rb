@@ -5,7 +5,6 @@ class World
   attr_reader :y
   attr_reader :grid
   attr_reader :cells
-  attr_reader :cells_to_switch
 
   def initialize(x, y)
     @x = x
@@ -49,7 +48,7 @@ class World
     
     neighbour_coordinates = cell.neighbours
     neighbour_coordinates.each do |coordinates|
-      neighbour_cells << self.cells[coordinates]
+      neighbour_cells << self.cells[coordinates] if !self.cells[coordinates].nil?
     end
     neighbour_cells
   end
@@ -64,26 +63,50 @@ class World
     counter
   end
 
-  def find_cells_to_switch(cell, counter)
-    cells_to_switch = []
-    if cell.alive? && counter < 2
-      cells_to_switch << cell
-    elsif cell.alive? && counter > 3
-      cells_to_switch << cell
-    elsif !cell.alive? && counter == 3
-      cells_to_switch << cell
+  def switch_cells(cells_to_switch)
+    cells_to_switch.each do |cell|
+      cell.switch
     end
-    @cells_to_switch = cells_to_switch
+  end
+
+  def seed_randomly
+    self.cells.each do |coordinate, cell|
+      if rand(10) > 5
+        cell.alive = true
+      end
+    end
+  end
+
+  def check
+    cells_to_switch = []
+    self.cells.each do |coordinate, cell|
+      neighbour_cells = get_neighbour_cells(cell)
+      counter = count_neigbour_cell_states(neighbour_cells)
+      if cell.alive? && counter < 2
+        cells_to_switch << cell
+      elsif cell.alive? && counter > 3
+        cells_to_switch << cell
+      elsif !cell.alive? && counter == 3
+        cells_to_switch << cell
+      end
+    end
+    switch_cells(cells_to_switch)
+    cells_to_switch = []
   end
 end
 
 w = World.new(10,10)
 w.build
-w.seed(0,0)
-w.seed(0,1)
-# w.display
-cell = w.cells[[0,0]]
-neighbour_cells = w.get_neighbour_cells(cell)
-counter =  w.count_neigbour_cell_states(neighbour_cells)
-puts "Switch: #{w.find_cells_to_switch(cell, counter)}"
-
+# w.seed(0,0)
+# w.seed(0,1)
+# w.seed(1,0)
+w.seed_randomly
+w.display
+# cell = w.cells[[0,0]]
+# neighbour_cells = w.get_neighbour_cells(cell)
+# counter =  w.count_neigbour_cell_states(neighbour_cells)
+# puts "Switch: #{w.find_cells_to_switch(cell, counter)}"
+# w.find_cells_to_switch(cell, counter)
+# w.switch_cells(w.find_cells_to_switch)
+w.check
+w.display
