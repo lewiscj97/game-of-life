@@ -28,7 +28,12 @@ class World
     @grid = grid
     @cells = cells
   end
+
+  def seed(x, y)
+    self.cells[[x,y]].alive = true
+  end
 end
 
-w = World.new(10, 10)
+w = World.new(10,10)
 w.build
+# w.seed(0,0)
