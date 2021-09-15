@@ -41,6 +41,17 @@ class World
       print "\n"
     end
   end
+
+  def get_neighbour_cells(cell)
+    neighbour_coordinates = cell.neighbours
+    neighbour_cells = []
+    
+    neighbour_coordinates = cell.neighbours
+    neighbour_coordinates.each do |coordinates|
+      neighbour_cells << self.cells[coordinates]
+    end
+    neighbour_cells
+  end
 end
 
 w = World.new(10,10)
@@ -48,3 +59,4 @@ w.build
 # w.seed(0,0)
 # w.seed(0,1)
 w.display
+print w.get_neighbour_cells(Cell(false, 0, 0))
