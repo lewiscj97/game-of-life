@@ -62,6 +62,16 @@ class World
     counter
   end
 
+  def find_cells_to_switch(cell, counter, cells_to_switch)
+    if cell.alive? && counter < 2
+      cells_to_switch << cell
+    elsif cell.alive? && counter > 3
+      cells_to_switch << cell
+    elsif !cell.alive? && counter == 3
+      cells_to_switch << cell
+    end
+  end
+
   def switch_cells(cells_to_switch)
     cells_to_switch.each do |cell|
       cell.switch
@@ -73,16 +83,6 @@ class World
       if rand(10) > 5
         cell.alive = true
       end
-    end
-  end
-
-  def find_cells_to_switch(cell, counter, cells_to_switch)
-    if cell.alive? && counter < 2
-      cells_to_switch << cell
-    elsif cell.alive? && counter > 3
-      cells_to_switch << cell
-    elsif !cell.alive? && counter == 3
-      cells_to_switch << cell
     end
   end
 
