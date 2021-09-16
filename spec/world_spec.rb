@@ -112,3 +112,37 @@ describe '.count_neighbour_cell_states' do
     expect(w.count_neigbour_cell_states(neighbour_cells)).to eq 3
   end
 end
+
+describe '.find_cells_to_switch' do
+  it 'returns an array of cells to be switched in the next tick based on the rules' do
+    w = World.new(10,10)
+    w.build
+    w.seed(0,0)
+    w.seed(0,1)
+    cell = w.cells[[0,0]]
+    cells_to_switch = []
+    neighbour_cells = w.get_neighbour_cells(cell)
+    counter = w.count_neigbour_cell_states(neighbour_cells)
+    cells_to_switch = w.find_cells_to_switch(cell, counter, cells_to_switch)
+    expect(cells_to_switch.class).to eq Array
+    expect(cells_to_switch[0].x).to eq cell.x
+    expect(cells_to_switch[0].y).to eq cell.y
+  end
+end
+
+describe '.switch_cells' do
+  it 'switches cell states in cells_to_switch array' do
+    w = World.new(10,10)
+    w.build
+    w.seed(0,0)
+    w.seed(0,1)
+    cell = w.cells[[0,0]]
+    expect(w.cells[[0,0]].alive?).to eq true
+    cells_to_switch = []
+    neighbour_cells = w.get_neighbour_cells(cell)
+    counter = w.count_neigbour_cell_states(neighbour_cells)
+    cells_to_switch = w.find_cells_to_switch(cell, counter, cells_to_switch)
+    w.switch_cells(cells_to_switch)
+    expect(w.cells[[0,0]].alive?).to eq false
+  end
+end
