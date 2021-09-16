@@ -48,14 +48,12 @@ describe World do
   it 'displays the grid when .display called' do
     w = World.new(5, 5)
     w.build
-    expect { w.display }.to output(<<-MESSAGE).to_stdout
+    expect { w.display }.to output(<<-GRID).to_stdout
 \u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
 \u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
 \u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
 \u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
 \u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
-MESSAGE
+GRID
   end
-
-
 end
