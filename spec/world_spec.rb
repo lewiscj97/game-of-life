@@ -57,3 +57,58 @@ describe World do
 GRID
   end
 end
+
+describe '.get_neighbour_cells' do
+  it 'returns the correct array of neighbouring cells when passed the cell at 0,0' do
+    w = World.new(10,10)
+    w.build
+    cell = w.cells[[0,0]]
+    neighbour_cells = w.get_neighbour_cells(cell)
+
+    # [0,1], [1,0] and [1,1] should be neighbours
+    expect(neighbour_cells[0].x).to eq 0
+    expect(neighbour_cells[0].y).to eq 1
+
+    expect(neighbour_cells[1].x).to eq 1
+    expect(neighbour_cells[1].y).to eq 0
+
+    expect(neighbour_cells[2].x).to eq 1
+    expect(neighbour_cells[2].y).to eq 1
+  end
+end
+
+describe '.count_neighbour_cell_states' do
+  it 'returns 1 passed an array of neighbour cells and 1 is alive' do
+    w = World.new(10,10)
+    w.build
+    w.seed(0,0)
+    w.seed(0,1)
+    cell = w.cells[[0,0]]
+    neighbour_cells = w.get_neighbour_cells(cell)
+
+    expect(w.count_neigbour_cell_states(neighbour_cells)).to eq 1
+  end
+
+  it 'returns 0 passed an array of neighbour cells and 0 are alive' do
+    w = World.new(10,10)
+    w.build
+    w.seed(0,0)
+    cell = w.cells[[0,0]]
+    neighbour_cells = w.get_neighbour_cells(cell)
+
+    expect(w.count_neigbour_cell_states(neighbour_cells)).to eq 0
+  end
+
+  it 'returns 3 passed an array of neighbour cells and 3 are alive' do
+    w = World.new(10,10)
+    w.build
+    w.seed(0,0)
+    w.seed(0,1)
+    w.seed(1,0)
+    w.seed(1,1)
+    cell = w.cells[[0,0]]
+    neighbour_cells = w.get_neighbour_cells(cell)
+
+    expect(w.count_neigbour_cell_states(neighbour_cells)).to eq 3
+  end
+end
