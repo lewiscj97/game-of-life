@@ -37,6 +37,25 @@ describe World do
     expect(cell.y).to eq 0
   end
 
-  # TODO: finish writing tests for all methods in world
-  # TODO: write integration tests for multiple situations
+  it 'seeds an alive cell on the grid at position 0,0 when passed .seed(0, 0)' do
+    w = World.new(10, 10)
+    w.build
+    w.seed(0,0)
+    expect(w.cells[[0,0]].alive?).to eq true
+    expect(w.cells[[0,1]].alive?).to eq false
+  end
+
+  it 'displays the grid when .display called' do
+    w = World.new(5, 5)
+    w.build
+    expect { w.display }.to output(<<-MESSAGE).to_stdout
+\u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
+\u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
+\u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
+\u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
+\u2B1B\u2B1B\u2B1B\u2B1B\u2B1B
+MESSAGE
+  end
+
+
 end
