@@ -146,3 +146,48 @@ describe '.switch_cells' do
     expect(w.cells[[0,0]].alive?).to eq false
   end
 end
+
+describe '.seed_randomly' do
+  it 'seeds the board randomly' do
+    w = World.new(10,10)
+    w.build
+    srand(15)
+    w.seed_randomly
+    expect { w.display }.to output(<<-GRID).to_stdout
+⬜⬛⬛⬜⬛⬜⬛⬜⬛⬜
+⬛⬛⬜⬜⬛⬛⬜⬜⬛⬛
+⬛⬛⬛⬛⬛⬛⬜⬛⬜⬜
+⬛⬜⬜⬜⬜⬛⬛⬜⬛⬛
+⬛⬜⬛⬜⬛⬛⬛⬛⬜⬜
+⬛⬜⬛⬛⬜⬛⬛⬛⬜⬛
+⬜⬛⬛⬛⬜⬜⬛⬛⬛⬜
+⬛⬜⬛⬜⬛⬛⬜⬜⬛⬛
+⬜⬛⬛⬛⬜⬛⬛⬛⬛⬛
+⬛⬛⬛⬜⬛⬛⬛⬛⬛⬜
+GRID
+  end
+end
+
+describe '.tick' do 
+  it 'runs a single tick' do
+    w = World.new(5,5)
+    w.build
+    w.seed(0,0)
+    w.seed(0,1)
+    w.seed(1,2)
+    w.seed(2,2)
+    w.seed(3,1)
+    w.seed(1,1)
+    puts ""
+    w.display
+    w.tick
+    w.display
+    expect { w.display }.to output(<<-GRID).to_stdout
+⬜⬜⬜⬛⬛
+⬜⬛⬜⬛⬛
+⬛⬛⬜⬛⬛
+⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛
+GRID
+  end
+end
